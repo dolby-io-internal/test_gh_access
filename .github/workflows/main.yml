@@ -30,9 +30,6 @@ jobs:
       - name: 'Checkout code'
         uses: actions/checkout@v4
 
-      - run: printenv
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-
       - name: 'Generate token !'
         id: accessToken
         uses: dolby-io-internal/gh-access@main
