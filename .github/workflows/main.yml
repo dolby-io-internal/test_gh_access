@@ -35,7 +35,7 @@ jobs:
 
       - name: 'Generate token !'
         id: accessToken
-        uses: dolby-io-internal/gh-access@v1.0.0
+        uses: dolby-io-internal/gh-access@main
         with:
           gh_app_priv_key: ${{ secrets.PEM_B64 }}
           gh_app_id: ${{ secrets.GH_APP_ID }}
