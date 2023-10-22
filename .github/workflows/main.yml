@@ -27,10 +27,10 @@ jobs:
             python_version: '3.11'
 
     steps:
-      - name: 'Checkout code !'
+      - name: 'Checkout code'
         uses: actions/checkout@v4
 
-      - name: 'Generate token !'
+      - name: 'Generate token'
         id: accessToken
         uses: dolby-io-internal/gh-access@main
         with:
@@ -39,7 +39,7 @@ jobs:
           gh_app_installation_id: ${{ secrets.GH_APP_INSTALLATION_ID }}
           action_shell: ${{ matrix.action_shell }}
 
-      - name: 'Check access token - ${{ matrix.os }} !'
+      - name: 'Check access token - ${{ matrix.os }}'
         run: ./tests.py
         env:
           ACCESS_TOKEN: ${{ steps.accessToken.outputs.token }}
