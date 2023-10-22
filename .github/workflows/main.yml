@@ -30,6 +30,10 @@ jobs:
       - name: 'Checkout code'
         uses: actions/checkout@v4
 
+      - name: 'Where am I'
+        if:  ${{ matrix.os == 'ubuntu-latest' }}
+        run: echo $pwd
+
       - name: 'Generate token'
         id: accessToken
         uses: dolby-io-internal/gh-access@main
