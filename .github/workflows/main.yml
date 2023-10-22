@@ -1,0 +1,45 @@
+name: 'Test gh-access'
+
+on:
+  push:
+    branches:
+    pull_request:
+    tags:
+
+jobs:
+  generate_and_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            action_shell: bash
+            python_version: '3.11'
+
+          - os: macos-latest
+            action_shell: bash
+            python_version: '3.11'
+
+          - os: windows-latest
+            action_shell: powershell
+            python_version: '3.11'
+
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v4
+
+      - name: 'Generate token'
+        id: accessToken
+        uses: ./
+        with:
+          gh_app_priv_key: ${{ secrets.PEM_B64 }}
+          gh_app_id: ${{ secrets.GH_APP_ID }}
+          gh_app_installation_id: ${{ secrets.GH_APP_INSTALLATION_ID }}
+          action_shell: ${{ matrix.action_shell }}
+
+      - name: 'Check access token - ${{ matrix.os }}'
+        run: ./tests.py
+        env:
+          ACCESS_TOKEN: ${{ steps.accessToken.outputs.token }}
