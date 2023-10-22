@@ -30,7 +30,7 @@ jobs:
       - name: 'Checkout code'
         uses: actions/checkout@v4
 
-      - name: 'Where am I'
+      - name: 'Where am I '
         if:  ${{ matrix.os == 'ubuntu-latest' }}
         run: pwd
 
