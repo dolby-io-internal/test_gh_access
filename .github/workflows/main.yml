@@ -33,7 +33,7 @@ jobs:
       - name: 'Checkout code'
         uses: actions/checkout@v4
 
-      - name: 'Generate token'
+      - name: 'Generate token !'
         id: accessToken
         uses: dolby-io-internal/gh-access@main
         with:
